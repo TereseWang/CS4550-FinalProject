@@ -38,9 +38,12 @@ function LoginForm() {
                         type="password"
                         onChange={(ev) => setPass(ev.target.value)}
                         value={pass}/>
-          <Button className="h3 font-weight-bold ml-2 my-1" type="submit">Logins </Button>
+          <Button className="h3 font-weight-bold ml-2 mr-2" type="submit">Logins </Button>
         </Col>
       </Row>
+      <div className="mt-4">
+        <Redirect to="/users/new">Register</Redirect>
+      </div>
     </Form>
   );
 }
@@ -83,6 +86,19 @@ function Link({to, children}) {
     </Nav.Item>
   );
 }
+
+function Redirect({to, children}) {
+  return (
+    <Nav.Item>
+      <NavLink to={to} exact
+        className="btn btn-info font-weight-bold text-light"
+        activeClassName="active">
+        {children}
+      </NavLink>
+    </Nav.Item>
+  );
+}
+
 function AppNav({error}) {
   let error_row = null;
 
@@ -97,25 +113,10 @@ function AppNav({error}) {
     );
   }
   function Register({session}) {
-    if (session) {
-      return(
-        <Row>
-          <Nav variant="tabs" defaultActiveKey="/">
-            <Link to="/">HomePage</Link>
-            <Link to="/welness">Wellness</Link>
-            <Link to="/lostfound">Lost/Found</Link>
-            <Link to="/food">Food Choices</Link>
-            <Link to="/selladopt">Sell/Adopt</Link>
-            <Link to="/forum">Forum</Link>
-          </Nav>
-      </Row>)
-    }
-    else {
       return(
         <Row>
           <Nav variant="tabs" defaultActiveKey="/users/new">
             <Link to="/">HomePage</Link>
-            <Link to="/users/new">Register</Link>
             <Link to="/wellness">Wellness</Link>
             <Link to="/lostfound">Lost/Found</Link>
             <Link to="/food">Food Choices</Link>
@@ -124,7 +125,6 @@ function AppNav({error}) {
           </Nav>
       </Row>
     )
-    }
   }
 
   const LoginInRegister = connect(

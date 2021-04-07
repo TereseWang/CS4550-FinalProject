@@ -9,7 +9,7 @@ import { create_user, fetch_users } from '../api';
 function UsersNew() {
   let history = useHistory();
   const [user, setUser] = useState({
-    name: "", email: "", pass1: "", pass2: "",
+    name: "", pass1: "", pass2: "",
   });
 
   function onSubmit(ev) {
@@ -53,9 +53,16 @@ function UsersNew() {
     setUser(u1);
   }
 
+  function updatePhoto(ev) {
+    let p1 = Object.assign({}, user);
+    p1["photo"] = ev.target.files[0];
+    setUser(p1);
+  }
+
   return (
     <Form onSubmit={onSubmit}>
       <Form.Group>
+        <h1 className="mt-5">Register Acount</h1>
         <Form.Label>Name</Form.Label>
         <Form.Control type="text"
                       onChange={
@@ -68,6 +75,10 @@ function UsersNew() {
                       onChange={
                         (ev) => update("email", ev)}
           value={user.email} />
+      </Form.Group>
+      <Form.Group>
+            <Form.Label>Profile Picture</Form.Label>
+            <Form.Control type="file" onChange={updatePhoto} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Password</Form.Label>
@@ -84,7 +95,7 @@ function UsersNew() {
             (ev) => update("pass2", ev)}
           value={user.pass2} />
       </Form.Group>
-      <Button variant="primary" type="submit"
+      <Button variant="primary" type="submit" className="h3 font-weight-bold"
               disabled={user.pass_msg !== ""}>
         Save
       </Button>
