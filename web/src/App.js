@@ -3,8 +3,14 @@ import { Switch, Route } from 'react-router-dom';
 
 import './App.scss';
 import Nav from './Nav';
-import LoginForm from './Nav';
-import UsersNew from "./User/New"
+import UsersNew from "./User/New";
+import UsersView from "./User/View";
+import UsersEdit from "./User/Edit";
+import WellnessList from "./Wellness/List";
+import WellnessNew from "./Wellness/New";
+import WellnessView from "./Wellness/View";
+import WellnessEdit from "./Wellness/Edit";
+import HomePage from "./Index/HomePage";
 
 function App() {
   return (
@@ -16,9 +22,19 @@ function App() {
       </Container>
       <Container>
       <Route path="/" exact>
-        <h2>Home Page</h2>
+        <HomePage/>
       </Route>
-      <Route path="/wellness">
+      <Route path="/wellness/list">
+        <WellnessList/>
+      </Route>
+      <Route path="/wellness/new">
+        <WellnessNew />
+      </Route>
+      <Route path="/wellness/edit">
+        <WellnessEdit />
+      </Route>
+      <Route path="/wellness/view">
+        <WellnessView/>
       </Route>
       <Route path="/lostfound">
       </Route>
@@ -30,6 +46,12 @@ function App() {
       </Route>
         <Route path="/users/new">
           <UsersNew />
+        </Route>
+        <Route path="/users/view">
+          <UsersView />
+        </Route>
+        <Route path="/users/edit">
+          <UsersEdit />
         </Route>
       </Container>
     </div>

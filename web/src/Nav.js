@@ -17,7 +17,6 @@ function LoginForm() {
   function on_submit(ev) {
     ev.preventDefault();
     api_login(email, pass);
-    history.push("/");
   }
 
   return (
@@ -48,24 +47,26 @@ function LoginForm() {
   );
 }
 
-let SessionInfo = connect()(({session, dispatch}) => {
+let SessionInfo = connect()(({session, current_user,  dispatch}) => {
   let history = useHistory();
   function logout() {
     dispatch({type: 'session/clear'});
-    history.push("/");
+    history.push("/")
   }
+  let link = "/users/view/" + session.user_id
   return (
-    <div className="h4 ml-1 font-weight-bold">
-      <img src={photo_path(session.photo_hash)} className="mr-2" width="50px"></img>
-      {session.email} &nbsp;
-      <Button className="h3 ml-2 font-weight-bold" onClick={logout}>Logout</Button>
-    </div>
+      <Row className="h4 ml-1 font-weight-bold">
+        <img src={photo_path(session.photo_hash)} className="mr-2" width="50px" height="50px"></img>
+        <div className="my-2">{session.name}</div>
+        <Button className="btn-danger h3 ml-2 font-weight-bold" onClick={logout}>Logout</Button>
+        <Redirect to={link}>View Profile</Redirect>
+      </Row>
   );
 });
 
-function LOI({session}) {
+function LOI({session, current_user}) {
   if (session) {
-    return <SessionInfo session={session} />;
+    return <SessionInfo session={session} current_user={current_user} />;
   }
   else {
     return <LoginForm />;
@@ -73,7 +74,7 @@ function LOI({session}) {
 }
 
 const LoginOrInfo = connect(
-  ({session}) => ({session}))(LOI);
+  ({session, current_user}) => ({session, current_user}))(LOI);
 
 function Link({to, children}) {
   return (
@@ -91,7 +92,7 @@ function Redirect({to, children}) {
   return (
     <Nav.Item>
       <NavLink to={to} exact
-        className="btn btn-info font-weight-bold text-light"
+        className="btn font-weight-bold text-primary ml-2"
         activeClassName="active">
         {children}
       </NavLink>
@@ -103,7 +104,6 @@ function AppNav({error}) {
   let error_row = null;
 
   if (error) {
-    console.log(error)
     error_row = (
       <Row>
         <Col>
@@ -117,7 +117,7 @@ function AppNav({error}) {
         <Row>
           <Nav variant="tabs" defaultActiveKey="/users/new">
             <Link to="/">HomePage</Link>
-            <Link to="/wellness">Wellness</Link>
+            <Link to="/wellness/list">Wellness</Link>
             <Link to="/lostfound">Lost/Found</Link>
             <Link to="/food">Food Choices</Link>
             <Link to="/selladopt">Sell/Adopt</Link>
@@ -133,8 +133,8 @@ function AppNav({error}) {
   return(
     <div>
       <h1 className="font-weight-bold text-info display-2">Kitten Lover</h1>
-      { error_row }
       <LoginOrInfo />
+      { error_row }
       <LoginInRegister/>
     </div>
   );

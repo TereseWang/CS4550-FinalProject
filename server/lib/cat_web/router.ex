@@ -24,6 +24,10 @@ defmodule CatWeb.Router do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]
     resources "/session", SessionController, only: [:create]
+    resources "/healths", HealthController, except: [:new, :edit]
+    resources "/comments", CommentController, except: [:new, :edit]
+    resources "/forums", ForumController, except: [:new, :edit]
+    resources "/forumcomment", ForumcommentController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development

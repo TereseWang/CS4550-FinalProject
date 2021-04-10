@@ -1,5 +1,23 @@
 import { createStore, combineReducers } from 'redux';
 
+function wellness(state= [], action ) {
+  switch (action.type) {
+    case 'wellness/set':
+      return action.data;
+    default:
+      return state;
+  }
+}
+
+function score(state=0, action) {
+  switch (action.type) {
+    case 'score/set':
+      return action.data;
+    default:
+      return state;
+  }
+}
+
 function users(state = [], action) {
   switch (action.type) {
     case 'users/set':
@@ -8,7 +26,6 @@ function users(state = [], action) {
       return state;
   }
 }
-
 
 function user_form(state = {}, action) {
   switch (action.type) {
@@ -19,12 +36,21 @@ function user_form(state = {}, action) {
   }
 }
 
-function user(state = [], action) {
+function comments(state=[], action) {
   switch (action.type) {
-    case 'user/set':
-      return action.data
+    case 'comments/set':
+      return action.data;
     default:
-      return state
+      return state;
+  }
+}
+
+function wellness_form(state = {}, action) {
+  switch (action.type) {
+    case 'wellness_form/set':
+      return action.data;
+    default:
+      return state;
   }
 }
 
@@ -79,7 +105,7 @@ function error(state = null, action) {
 
 function root_reducer(state, action) {
     let reducer = combineReducers({
-        users, user, user_form, session, error
+        comments, score, wellness_form, wellness, users, user_form, session, error,
     });
     return reducer(state, action);
 }

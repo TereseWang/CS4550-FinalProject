@@ -14,6 +14,8 @@ defmodule CatWeb.UserView do
     %{id: user.id,
       name: user.name,
       email: user.email,
+      reason: user.reason,
+      photo_hash: user.photo_hash,
       password_hash: user.password_hash,
       reason: user.reason}
   end

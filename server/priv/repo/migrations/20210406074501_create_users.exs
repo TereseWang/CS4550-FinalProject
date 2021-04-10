@@ -8,9 +8,8 @@ defmodule Cat.Repo.Migrations.CreateUsers do
       add :password_hash, :string, null: false
       add :reason, :string, null: false
       add :photo_hash, :text, null: false
-
       timestamps()
     end
-
+    create unique_index(:users, [:email])
   end
 end

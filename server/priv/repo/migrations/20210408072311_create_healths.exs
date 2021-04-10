@@ -1,0 +1,14 @@
+defmodule Cat.Repo.Migrations.CreateHealths do
+  use Ecto.Migration
+
+  def change do
+    create table(:healths) do
+      add :user_id, references(:users), null: false
+      add :body, :text, null: false
+      add :photo_hash, :text, null: false
+      add :title, :string, null: false
+      add :votes, {:array, :integer}, default: []
+      timestamps()
+    end
+  end
+end

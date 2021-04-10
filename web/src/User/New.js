@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import pick from 'lodash/pick';
 import store from '../store';
-import { create_user, fetch_users } from '../api';
+import { create_user, fetch_users, api_login, fetch_reason } from '../api';
 
 function UsersNew() {
   let history = useHistory();
@@ -14,7 +14,7 @@ function UsersNew() {
 
   function onSubmit(ev) {
     ev.preventDefault();
-    let data = pick(user, ['name', 'email', 'password']);
+    let data = pick(user, ['name', 'email', 'password', 'reason', 'photo']);
     create_user(data).then((data) => {
         if(data.error) {
           let action={
@@ -25,8 +25,8 @@ function UsersNew() {
         }
         else {
           fetch_users();
-          //api_login(user['email'], user['password'])
-          history.push("/");
+          api_login(user['email'], user['password'])
+          history.push(fetch_reason(user["reason"]))
         }
     });
   }
@@ -75,6 +75,18 @@ function UsersNew() {
                       onChange={
                         (ev) => update("email", ev)}
           value={user.email} />
+      </Form.Group>
+
+      <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Label>Reason For Using This Website</Form.Label>
+        <Form.Control as="select" onChange={(ev) => update("reason", ev)} value={user.reason}>
+          <option></option>
+          <option>Cat Wellness</option>
+          <option>Breeder/Adoption</option>
+          <option>Lost/Found Cat</option>
+          <option>Food Choices/Recommendations</option>
+          <option>Other</option>
+        </Form.Control>
       </Form.Group>
       <Form.Group>
             <Form.Label>Profile Picture</Form.Label>

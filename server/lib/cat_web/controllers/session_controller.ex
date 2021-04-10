@@ -10,7 +10,9 @@ defmodule CatWeb.SessionController do
           email: user.email,
           photo_hash: user.photo_hash,
           name: user.name,
-          token: Phoenix.Token.sign(conn, "user_id", user.id)
+          reason: user.reason,
+          token: Phoenix.Token.sign(conn, "user_id", user.id),
+          redirect: fetch_reason(user.reason),
         }
         conn
         |> put_resp_header(
@@ -40,6 +42,17 @@ defmodule CatWeb.SessionController do
       :unauthorized,
       Jason.encode!(%{error: "User Email Does Not Exist"})
       )
+    end
+  end
+
+  def fetch_reason(reason) do
+    case reason do
+      "Cat Wellness" -> "/wellness"
+      "Breeder/Adoption" -> "/selladopt"
+      "Lost/Found Cats" -> "/lostfound"
+      "Food Choices/Recommendations" -> "/food"
+      "Other" -> "/forum"
+      _ -> "/"
     end
   end
 end
