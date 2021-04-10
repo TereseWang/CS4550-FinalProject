@@ -2,10 +2,11 @@ defmodule Cat.Forumcomments.Forumcomment do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "forumcomment" do
+  schema "forumcomments" do
     field :body, :string
     belongs_to :user, Cat.Users.User
     belongs_to :forum, Cat.Forums.Forum
+
     timestamps()
   end
 

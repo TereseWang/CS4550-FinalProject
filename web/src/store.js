@@ -45,6 +45,15 @@ function comments(state=[], action) {
   }
 }
 
+function forumcomments(state=[], action) {
+  switch (action.type) {
+    case 'forumcomments/set':
+      return action.data;
+    default:
+      return state;
+  }
+}
+
 function wellness_form(state = {}, action) {
   switch (action.type) {
     case 'wellness_form/set':
@@ -103,9 +112,37 @@ function error(state = null, action) {
   }
 }
 
+function forums(state=[], action) {
+  switch (action.type) {
+    case 'forums/set':
+      return action.data;
+    default:
+      return state;
+  }
+}
+
+function forum_form(state={}, action) {
+  switch (action.type) {
+    case 'forum_form/set':
+      return action.data;
+    default:
+      return state;
+  }
+}
+
+function forum_score(state=0, action) {
+  switch (action.type) {
+    case 'forum_score/set':
+      return action.data;
+    default:
+      return state;
+  }
+}
+
 function root_reducer(state, action) {
     let reducer = combineReducers({
-        comments, score, wellness_form, wellness, users, user_form, session, error,
+        forumcomments, forum_score, forum_form, forums, comments, score,
+        wellness_form, wellness, users, user_form, session, error,
     });
     return reducer(state, action);
 }

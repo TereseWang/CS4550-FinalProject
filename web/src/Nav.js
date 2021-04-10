@@ -51,7 +51,6 @@ let SessionInfo = connect()(({session, current_user,  dispatch}) => {
   let history = useHistory();
   function logout() {
     dispatch({type: 'session/clear'});
-    history.push("/")
   }
   let link = "/users/view/" + session.user_id
   return (
@@ -121,7 +120,7 @@ function AppNav({error}) {
             <Link to="/lostfound">Lost/Found</Link>
             <Link to="/food">Food Choices</Link>
             <Link to="/selladopt">Sell/Adopt</Link>
-            <Link to="/forum">Forum</Link>
+            <Link to="/forum/list">Forum</Link>
           </Nav>
       </Row>
     )

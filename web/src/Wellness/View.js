@@ -27,6 +27,7 @@ function WellnessView({session, wellness_form, user_form, score, comments}) {
 
   function deleteWellness(){
     delete_wellness(wellness_id)
+    fetch_wellness()
     history.push("/wellness/list")
   }
 

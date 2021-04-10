@@ -7,8 +7,8 @@ defmodule CatWeb.ForumcommentController do
   action_fallback CatWeb.FallbackController
 
   def index(conn, _params) do
-    forumcomment = Forumcomments.list_forumcomment()
-    render(conn, "index.json", forumcomment: forumcomment)
+    forumcomments = Forumcomments.list_forumcomments()
+    render(conn, "index.json", forumcomments: forumcomments)
   end
 
   def create(conn, %{"forumcomment" => forumcomment_params}) do

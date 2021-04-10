@@ -11,6 +11,10 @@ import WellnessNew from "./Wellness/New";
 import WellnessView from "./Wellness/View";
 import WellnessEdit from "./Wellness/Edit";
 import HomePage from "./Index/HomePage";
+import ForumList from "./Forum/List";
+import ForumView from "./Forum/View";
+import ForumNew from "./Forum/New";
+import ForumEdit from "./Forum/Edit";
 
 function App() {
   return (
@@ -24,8 +28,14 @@ function App() {
       <Route path="/" exact>
         <HomePage/>
       </Route>
+      <Route path="/lostfound">
+      </Route>
+      <Route path="/food">
+      </Route>
+      <Route path="/selladopt">
+      </Route>
       <Route path="/wellness/list">
-        <WellnessList/>
+        <WellnessList />
       </Route>
       <Route path="/wellness/new">
         <WellnessNew />
@@ -34,26 +44,30 @@ function App() {
         <WellnessEdit />
       </Route>
       <Route path="/wellness/view">
-        <WellnessView/>
+        <WellnessView />
       </Route>
-      <Route path="/lostfound">
+      <Route path="/forum/list">
+        <ForumList />
       </Route>
-      <Route path="/food">
+      <Route path="/forum/view">
+        <ForumView />
       </Route>
-      <Route path="/selladopt">
+      <Route path="/forum/new">
+        <ForumNew />
       </Route>
-      <Route path="/forum">
+      <Route path="/forum/edit">
+        <ForumEdit />
       </Route>
-        <Route path="/users/new">
-          <UsersNew />
-        </Route>
-        <Route path="/users/view">
-          <UsersView />
-        </Route>
-        <Route path="/users/edit">
-          <UsersEdit />
-        </Route>
-      </Container>
+      <Route path="/users/new">
+        <UsersNew />
+      </Route>
+      <Route path="/users/view">
+        <UsersView />
+      </Route>
+      <Route path="/users/edit">
+        <UsersEdit />
+      </Route>
+    </Container>
     </div>
   );
 }

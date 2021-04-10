@@ -119,7 +119,7 @@ defmodule CatWeb.ForumController do
 
   def delete(conn, %{"id" => id}) do
     forum = Forums.get_forum!(id)
-
+    IO.inspect(forum)
     with {:ok, %Forum{}} <- Forums.delete_forum(forum) do
       send_resp(conn, :no_content, "")
     end

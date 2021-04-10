@@ -20,6 +20,7 @@ defmodule Cat.Comments do
   def list_comments do
     Repo.all(Comment)
     |> Repo.preload(:user)
+    |> Repo.preload(:health)
   end
 
   @doc """

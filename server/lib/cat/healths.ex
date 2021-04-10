@@ -17,9 +17,18 @@ defmodule Cat.Healths do
       [%Health{}, ...]
 
   """
+  def load_user(%Health{} = health) do
+    Repo.preload(health, :user)
+  end
+
+  def load_comments(%Health{} = health) do
+    Repo.preload(health, [comments: :user])
+  end
+
   def list_healths do
     Repo.all(Health)
     |> Repo.preload(:user)
+    |> Repo.preload([comments: :user])
   end
 
   @doc """
@@ -38,6 +47,8 @@ defmodule Cat.Healths do
   """
   def get_health!(id) do
     Repo.get!(Health, id)
+    |> Repo.preload(:user)
+    |> Repo.preload([comments: :user])
   end
 
   @doc """

@@ -19,6 +19,108 @@ async function api_post(path, data) {
     "http://localhost:4000/api/v1" + path, opts);
   return await text.json();
 }
+//-----------------------Forum----------------------------------
+export function fetch_forums() {
+  api_get("/forums").then((data) => {
+  data = sortForum(data)
+  store.dispatch({
+    type: 'forums/set',
+    data: data,
+  })});
+}
+
+export function fetch_forum(id) {
+  api_get("/forums/"+id).then((data) => store.dispatch({
+    type: 'forum_form/set',
+    data: data,
+  }));
+}
+
+export async function create_forum(post) {
+  let data = new FormData();
+  data.append("forum[user_id]", post.user_id);
+  data.append("forum[title]", post.title);
+  data.append("forum[body]", post.body);
+  data.append("forum[votes]", JSON.stringify([]))
+  if (post.photo === "undefined") {
+    post["photo"] = "";
+  }
+  data.append("forum[photo]", post.photo);
+  let resp = await fetch("http://localhost:4000/api/v1/forums", {
+    method: "POST",
+    body: data,
+  })
+return await resp.json();
+}
+
+export async function update_forum(post) {
+  let data = new FormData();
+  data.append("forum[user_id]", post.user_id);
+  data.append("forum[title]", post.title);
+  data.append("forum[body]", post.body);
+  data.append("forum[photo]", post.photo);
+  let resp = await fetch("http://localhost:4000/api/v1/forums/" + post.id, {
+    method: "PATCH",
+    body: data,
+  })
+return await resp.json();
+}
+
+export async function delete_forum(id) {
+  let data = new FormData();
+  data.append("id", id);
+  fetch("http://localhost:4000/api/v1/forums/" + id, {
+    method: 'DELETE',
+    body: data,
+  }).then((resp) => {
+    if(!resp.ok){
+      let action = {
+        type: 'error/set',
+        data: 'Unable to delete event.',
+      };
+      store.dispatch(action);
+    }else {
+      fetch_forums();
+    }
+  });
+}
+
+export async function update_forum_vote(post, user_id, action) {
+  let data = new FormData();
+  data.append("forum[user_id]", post.user_id);
+  data.append("forum[title]", post.title);
+  data.append("forum[body]", post.body);
+  let votes = post.votes
+  if (action == "increase") {
+    votes.push(user_id)
+  }
+  else {
+    votes = votes.filter(function(e) { return e != user_id })
+  }
+  data.append("forum[votes]", JSON.stringify(votes))
+  if (post.photo === "undefined") {
+    post["photo"] = "";
+  }
+  data.append("forum[photo]", post.photo);
+  let resp = await fetch("http://localhost:4000/api/v1/forums/" + post.id, {
+    method: "PATCH",
+    body: data,
+  })
+return await resp.json();
+}
+
+export function fetch_forum_score(id) {
+  api_get("/forums/"+id).then((data) => {
+  store.dispatch({
+    type: 'forum_score/set',
+    data: data.votes.length,
+  })});
+}
+
+function sortForum(data) {
+  return data.sort(function(a, b){
+    return b.votes.length - a.votes.length});
+}
 //----------------------Wellness Comments -----------------------
 export function fetch_comments(health_id) {
   api_get("/comments").then((data) => {
@@ -67,6 +169,55 @@ export async function delete_comment(id, wellness_id) {
   });
 }
 
+//--------------------------Forum Comment -----------------------
+export function fetch_forumcomments(forum_id) {
+  api_get("/forumcomments").then((data) => {
+    let result = []
+    for (let [key, value] of Object.entries(data)) {
+      console.log(value)
+      console.log(forum_id)
+      if (value.forum_id == forum_id) {
+        result.push(value)
+      }
+    }
+    store.dispatch({
+    type: 'forumcomments/set',
+    data: result,
+  })})
+}
+
+export async function create_forumcomment(forumcomment, user_id, forum_id) {
+  let data = new FormData();
+  data.append("forumcomment[body]", forumcomment);
+  data.append("forumcomment[forum_id]", forum_id);
+  data.append("forumcomment[user_id]", user_id);
+  let resp = await fetch("http://localhost:4000/api/v1/forumcomments", {
+    method: "POST",
+    body: data,
+  })
+  return await resp.json();
+}
+
+export async function delete_forumcomment(id, forum_id) {
+  let data = new FormData();
+  data.append("id", id);
+  fetch("http://localhost:4000/api/v1/forumcomments/" + id, {
+    method: 'DELETE',
+    body: data,
+  }).then((resp) => {
+    if(!resp.ok){
+      let action = {
+        type: 'error/set',
+        data: 'Unable to delete event.',
+      };
+      store.dispatch(action);
+    }else {
+      console.log(forum_id)
+      fetch_forumcomments(forum_id);
+      fetch_forums()
+    }
+  });
+}
 
 //---------------------user--------------------------------------
 export function fetch_users() {
@@ -289,4 +440,5 @@ export function fetch_reason(reason) {
 export function load_defaults() {
   fetch_users();
   fetch_wellness();
+  fetch_forums();
 }

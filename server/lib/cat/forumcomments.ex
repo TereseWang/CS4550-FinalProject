@@ -9,17 +9,18 @@ defmodule Cat.Forumcomments do
   alias Cat.Forumcomments.Forumcomment
 
   @doc """
-  Returns the list of forumcomment.
+  Returns the list of forumcomments.
 
   ## Examples
 
-      iex> list_forumcomment()
+      iex> list_forumcomments()
       [%Forumcomment{}, ...]
 
   """
-  def list_forumcomment do
+  def list_forumcomments do
     Repo.all(Forumcomment)
     |> Repo.preload(:user)
+    |> Repo.preload(:forum)
   end
 
   @doc """

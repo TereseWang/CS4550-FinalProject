@@ -120,7 +120,7 @@ defmodule CatWeb.HealthController do
 
   def delete(conn, %{"id" => id}) do
     health = Healths.get_health!(id)
-
+    IO.inspect(health)
     with {:ok, %Health{}} <- Healths.delete_health(health) do
       send_resp(conn, :no_content, "")
     end

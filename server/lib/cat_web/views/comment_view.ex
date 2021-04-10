@@ -2,6 +2,7 @@ defmodule CatWeb.CommentView do
   use CatWeb, :view
   alias CatWeb.CommentView
   alias CatWeb.UserView
+  alias CatWeb.HealthView
 
   def render("index.json", %{comments: comments}) do
     %{data: render_many(comments, CommentView, "comment.json")}
@@ -17,10 +18,16 @@ defmodule CatWeb.CommentView do
     else
       nil
     end
+    health = if Ecto.assoc_loaded?(comment.health) do
+      render_one(comment.health, HealthView, "health.json")
+    else
+      nil
+    end
     %{id: comment.id,
       body: comment.body,
       user_id: comment.user_id,
       health_id: comment.health_id,
-      user: user}
+      user: user,
+      health: health}
   end
 end

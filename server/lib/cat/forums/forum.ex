@@ -8,7 +8,7 @@ defmodule Cat.Forums.Forum do
     field :title, :string
     field :votes, {:array, :integer}
     belongs_to :user, Cat.Users.User
-    has_many :forumcomments, Cat.Forumcomments.Forumcomment 
+    has_many :forumcomments, Cat.Forumcomments.Forumcomment, on_delete: :delete_all
     timestamps()
   end
 

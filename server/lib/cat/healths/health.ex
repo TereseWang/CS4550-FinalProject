@@ -8,7 +8,7 @@ defmodule Cat.Healths.Health do
     field :title, :string
     field :votes, {:array, :integer}
     belongs_to :user, Cat.Users.User
-    has_many :comments, Cat.Comments.Comment
+    has_many :comments, Cat.Comments.Comment, on_delete: :delete_all
     timestamps()
   end
 

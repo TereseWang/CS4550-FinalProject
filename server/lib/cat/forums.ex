@@ -17,9 +17,18 @@ defmodule Cat.Forums do
       [%Forum{}, ...]
 
   """
+  def load_user(%Forum{} = forum) do
+    Repo.preload(forum, :user)
+  end
+
+  def load_forumcomment(%Forum{} = forum) do
+    Repo.preload(forum, [forumcomments: :user])
+  end
+
   def list_forums do
     Repo.all(Forum)
     |> Repo.preload(:user)
+    |> Repo.preload([forumcomments: :user])
   end
 
   @doc """
@@ -36,7 +45,11 @@ defmodule Cat.Forums do
       ** (Ecto.NoResultsError)
 
   """
-  def get_forum!(id), do: Repo.get!(Forum, id)
+  def get_forum!(id) do
+     Repo.get!(Forum, id)
+     |> Repo.preload(:user)
+     |> Repo.preload([forumcomments: :user])
+   end
 
   @doc """
   Creates a forum.
