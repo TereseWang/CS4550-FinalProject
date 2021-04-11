@@ -11,4 +11,4 @@
 - and also no financial trading
 
 # Images articles:
-References for image and articles is putted actually inside the browser
+References for image and articles is putted inside the browser
