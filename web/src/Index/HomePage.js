@@ -6,7 +6,7 @@ import pick from 'lodash/pick';
 import store from '../store';
 import { api_login, fetch_reason, fetch_user } from '../api';
 
-function HomePage({wellness, forums}) {
+function HomePage({wellness, forums, foods}) {
   function ShowingWellness() {
     if (wellness.length > 3) {
       wellness = wellness.slice(0, 3)
@@ -47,12 +47,31 @@ function HomePage({wellness, forums}) {
     return <div>{rows}</div>
   }
 
+  function photo_path(hash) {
+    return "http://localhost:4000/photos/" + hash;
+  }
 
+  function ShowingFood() {
+    if (foods.length > 3) {
+      foods = foods.slice(0, 3)
+    }
+    let rows = foods.map((food) => {
+      const link = "/food/view/"+ food.id
+      return (
+        <Card fluid>
+          <Card.Body>
+            <p>{food.brand}</p>
+            <Link to={link}  className="text-danger">Read More</Link>
+          </Card.Body>
+        </Card>
+    )});
+    return <div>{rows}</div>
+  }
   return (
     <div>
-      <h1 className="mt-2">About Kitten Lover</h1>
-      <p className="h4">KittenLover is dedicated to provide support and a communicating
-      platform to those who love their cats or for those we are about to get a cat/kitten</p>
+      <h1 className="mt-2 display-2">Kitten Lover</h1>
+      <p className="h4">KittenLover is dedicated to provide support and a communication platform
+      for all kitten lovers.</p>
       <div className="border">
         <h1 className="ml-2">Wellness</h1>
         <ShowingWellness />
@@ -61,13 +80,16 @@ function HomePage({wellness, forums}) {
         <h1 className="ml-2">Forum</h1>
         <ShowingForum />
       </div>
-
+      <div className="border mt-5">
+        <h1 className="ml-2">Food Choices</h1>
+        <ShowingFood />
+      </div>
     </div>
   );
 }
 
-function state2props({wellness, forums}) {
-  return {wellness, forums};
+function state2props({wellness, forums, foods}) {
+  return {wellness, forums,foods};
 }
 
 export default connect(state2props)(HomePage);

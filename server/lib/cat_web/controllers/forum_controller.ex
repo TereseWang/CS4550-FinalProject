@@ -12,6 +12,7 @@ defmodule CatWeb.ForumController do
     render(conn, "index.json", forums: forums)
   end
 
+#referenced from Nat Lecture, Photo_Blog Post controller
   def update_photo(forum_params) do
     if forum_params["photo"] != "undefined" do
       {:ok, photo_hash} = Photos.save_photo(

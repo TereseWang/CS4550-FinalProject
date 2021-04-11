@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { api_login, fetch_user } from './api';
 import { useHistory } from 'react-router-dom';
 
+//referenced from lecture code Nav file from Nat Tuck CS4550 Northeastern University
 function photo_path(hash) {
   return "http://localhost:4000/photos/" + hash;
 }
@@ -117,9 +118,8 @@ function AppNav({error}) {
           <Nav variant="tabs" defaultActiveKey="/users/new">
             <Link to="/">HomePage</Link>
             <Link to="/wellness/list">Wellness</Link>
-            <Link to="/lostfound">Lost/Found</Link>
-            <Link to="/food">Food Choices</Link>
-            <Link to="/selladopt">Sell/Adopt</Link>
+            <Link to="/food/list">Food Choices</Link>
+            <Link to="/adopt">Adopt</Link>
             <Link to="/forum/list">Forum</Link>
           </Nav>
       </Row>

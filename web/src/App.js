@@ -15,7 +15,13 @@ import ForumList from "./Forum/List";
 import ForumView from "./Forum/View";
 import ForumNew from "./Forum/New";
 import ForumEdit from "./Forum/Edit";
+import FoodList from "./Food/List";
+import FoodNew from "./Food/New";
+import FoodEdit from "./Food/Edit";
+import FoodView from "./Food/View";
+import AdoptionList from "./Adoption/List";
 
+//referenced from lecture code SPA Structure from Nat Tuck CS4550 Northeastern University
 function App() {
   return (
     <div>
@@ -28,11 +34,20 @@ function App() {
       <Route path="/" exact>
         <HomePage/>
       </Route>
-      <Route path="/lostfound">
+      <Route path="/adopt">
+        <AdoptionList />
       </Route>
-      <Route path="/food">
+      <Route path="/food/list">
+        <FoodList />
       </Route>
-      <Route path="/selladopt">
+      <Route path="/food/new">
+        <FoodNew />
+      </Route>
+      <Route path="/food/edit">
+        <FoodEdit />
+      </Route>
+      <Route path="/food/view">
+        <FoodView />
       </Route>
       <Route path="/wellness/list">
         <WellnessList />

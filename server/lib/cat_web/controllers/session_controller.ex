@@ -1,6 +1,7 @@
 defmodule CatWeb.SessionController do
   use CatWeb, :controller
 
+#referenced from Nat Lecture, Photo_Blog SPA Project session controller
   def create(conn, %{"email" => email, "password" => password}) do
     try do
       user = Cat.Users.authenticate(email, password)

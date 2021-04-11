@@ -16,6 +16,7 @@ alias Cat.Healths.Health
 alias Cat.Comments.Comment
 alias Cat.Forums.Forum
 alias Cat.Forumcomments.Forumcomment
+alias Cat.Foods.Food
 
 defmodule Inject do
   def photo(name) do
@@ -120,3 +121,38 @@ c2 = %Forumcomment {
 Repo.insert!(f1)
 Repo.insert!(f2)
 Repo.insert!(c2)
+food1 = %Food {
+  user_id: alice.id,
+  brand: "Feast",
+  price: 10,
+  photo_hash: bbb,
+  type: "kitten food",
+  body: "good for kitten, once per day",
+  like: [],
+  dislike: [],
+}
+Repo.insert!(food1)
+
+food2 = %Food {
+  user_id: alice.id,
+  brand: "Feast",
+  price: 10,
+  photo_hash: bbb,
+  type: "kitten food",
+  body: "good for kitten, once per day",
+  like: [],
+  dislike: [],
+}
+Repo.insert!(food2)
+
+food3 = %Food {
+  user_id: alice.id,
+  brand: "Feast",
+  price: 10,
+  photo_hash: bbb,
+  type: "kitten food",
+  body: "good for kitten, once per day",
+  like: [],
+  dislike: [],
+}
+Repo.insert!(food3)

@@ -12,6 +12,7 @@ defmodule CatWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
+#referenced from Nat Lecture, Photo_Blog Post controller
   def update_photo(user_params) do
     if user_params["photo"] != "undefined" do
       {:ok, photo_hash} = Photos.save_photo(

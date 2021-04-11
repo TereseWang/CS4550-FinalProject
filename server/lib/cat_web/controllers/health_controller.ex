@@ -12,6 +12,7 @@ defmodule CatWeb.HealthController do
     render(conn, "index.json", healths: healths)
   end
 
+#referenced from Nat Lecture, Photo_Blog Post controller
   def update_photo(health_params) do
     if health_params["photo"] != "undefined" do
       {:ok, photo_hash} = Photos.save_photo(

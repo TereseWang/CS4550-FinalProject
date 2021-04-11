@@ -1,5 +1,5 @@
 import store from './store';
-
+//referenced from lecture code SPA Structure from Nat Tuck CS4550 Northeastern University
 async function api_get(path) {
   let text = await fetch(
     "http://localhost:4000/api/v1" + path, {});
@@ -19,6 +19,165 @@ async function api_post(path, data) {
     "http://localhost:4000/api/v1" + path, opts);
   return await text.json();
 }
+//--------------------------Lost Found Kitten------------------
+export async function fetch_adoption(int) {
+  var key = "e21rW5xeIrGdp49R2CdfcyuCoDdv9Kg6qWO6ZYO2dzwdasv2Ux"
+  var secret = "ljjE8EWpWS9SD1JTfSIPXLFKlXEDVbVHC2Hzf7rF"
+  let resp = await fetch('https://api.petfinder.com/v2/oauth2/token', {
+	method: 'POST',
+	body: 'grant_type=client_credentials&client_id=' + key + '&client_secret=' + secret,
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded'
+	}})
+  let token = await resp.json()
+  resp = await fetch("https://api.petfinder.com/v2/animals?type=cat&page=" + int,{
+    headers: {
+			'Authorization': token.token_type + ' ' + token.access_token,
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}})
+  let data = await resp.json()
+  store.dispatch({
+    type: "adoption/set",
+    data: data.animals
+  })
+}
+
+//------------------------Food List----------------------------
+export function fetch_foods() {
+  api_get("/foods").then((data) => {
+    data = sortFood(data)
+    store.dispatch({
+    type: 'foods/set',
+    data: data,
+  })});
+}
+
+export function fetch_food(id) {
+  api_get("/foods/"+id).then((data) => store.dispatch({
+    type: 'food_form/set',
+    data: data,
+  }));
+}
+
+export async function create_food(food) {
+  let data = new FormData();
+  data.append("food[user_id]", food.user_id);
+  data.append("food[like]", JSON.stringify([]))
+  data.append("food[dislike]", JSON.stringify([]))
+  data.append("food[type]", food.type);
+  data.append("food[body]", food.body);
+  data.append("food[brand]", food.brand)
+  data.append("food[price]", food.price)
+  if (food.photo === "undefined") {
+    food["photo"] = "";
+  }
+  data.append("food[photo]", food.photo);
+  let resp = await fetch("http://localhost:4000/api/v1/foods", {
+    method: "POST",
+    body: data,
+  })
+return await resp.json();
+}
+
+
+export async function update_food(food) {
+  let data = new FormData();
+  data.append("food[user_id]", food.user_id);
+  data.append("food[like]", JSON.stringify([]))
+  data.append("food[dislike]", JSON.stringify([]))
+  data.append("food[type]", food.type);
+  data.append("food[body]", food.body);
+  data.append("food[brand]", food.brand)
+  data.append("food[price]", food.price)
+  data.append("food[photo]", food.photo);
+  let resp = await fetch("http://localhost:4000/api/v1/foods/" + food.id, {
+    method: "PATCH",
+    body: data,
+  })
+return await resp.json();
+}
+
+export async function delete_food(id) {
+  let data = new FormData();
+  data.append("id", id);
+  fetch("http://localhost:4000/api/v1/foods/" + id, {
+    method: 'DELETE',
+    body: data,
+  }).then((resp) => {
+    if(!resp.ok){
+      let action = {
+        type: 'error/set',
+        data: 'Unable to delete event.',
+      };
+      store.dispatch(action);
+    }else {
+      fetch_foods();
+    }
+  });
+}
+
+function sortFood(data) {
+  return data.sort(function(a, b){
+    return b.like.length - a.like.length});
+}
+
+export async function update_food_vote(food, user_id, action) {
+  let data = new FormData();
+  data.append("food[user_id]", food.user_id);
+  data.append("food[type]", food.type);
+  data.append("food[body]", food.body);
+  data.append("food[brand]", food.brand)
+  data.append("food[price]", food.price)
+  data.append("food[photo]", food.photo);
+  data.append("food[like]", JSON.stringify([]))
+  data.append("food[dislike]", JSON.stringify([]))
+  let likes = food.like
+  let dislikes = food.dislike
+
+  if (action == "decreaselike") {
+    likes = likes.filter(function(e) { return e != user_id })
+  }
+  else if(action == "decreasedislike") {
+    dislikes = dislikes.filter(function(e) { return e != user_id })
+  }
+  else if(action == "increaselike") {
+    likes.push(user_id)
+    dislikes = dislikes.filter(function(e) { return e != user_id })
+  }
+  else {
+    dislikes.push(user_id)
+    likes = likes.filter(function(e) { return e != user_id })
+  }
+
+  data.append("food[like]", JSON.stringify(likes))
+  data.append("food[dislike]", JSON.stringify(dislikes))
+  if (food.photo === "undefined") {
+    food["photo"] = "";
+  }
+  data.append("food[photo]", food.photo);
+  let resp = await fetch("http://localhost:4000/api/v1/foods/" + food.id, {
+    method: "PATCH",
+    body: data,
+  })
+return await resp.json();
+}
+
+export function fetch_food_like(id) {
+  api_get("/foods/"+id).then((data) => {
+  store.dispatch({
+    type: 'food_like/set',
+    data: data.like.length,
+  })});
+}
+
+export function fetch_food_dislike(id) {
+  api_get("/foods/"+id).then((data) => {
+  store.dispatch({
+    type: 'food_dislike/set',
+    data: data.dislike.length,
+  })});
+}
+
 //-----------------------Forum----------------------------------
 export function fetch_forums() {
   api_get("/forums").then((data) => {
@@ -396,6 +555,17 @@ function sortWellness(data) {
     return b.votes.length - a.votes.length});
 }
 
+export async function fetch_catbreeds() {
+  let text = await fetch(
+    "https://api.thecatapi.com/v1/breeds", {});
+  let resp = await text.json();
+  let action = {
+     type: 'cat_breed/set',
+     data: resp,
+   }
+   store.dispatch(action);
+}
+
 //---------------------------login------------------------------------
 export function api_login(email, password) {
   api_post("/session", {email, password}).then((data) => {
@@ -441,4 +611,7 @@ export function load_defaults() {
   fetch_users();
   fetch_wellness();
   fetch_forums();
+  fetch_foods();
+  fetch_catbreeds();
+  fetch_adoption(1);
 }

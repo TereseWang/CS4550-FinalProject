@@ -1,5 +1,6 @@
 import { createStore, combineReducers } from 'redux';
-
+//referenced the fetch Structure that store the value of the web from lecture
+//code SPA Structure from Nat Tuck CS4550 Northeastern University 
 function wellness(state= [], action ) {
   switch (action.type) {
     case 'wellness/set':
@@ -35,6 +36,7 @@ function user_form(state = {}, action) {
       return state;
   }
 }
+
 
 function comments(state=[], action) {
   switch (action.type) {
@@ -139,13 +141,69 @@ function forum_score(state=0, action) {
   }
 }
 
+function foods(state=[], action) {
+  switch (action.type) {
+    case 'foods/set':
+      return action.data;
+    default:
+      return state;
+    }
+}
+
+function food_form(state={}, action) {
+  switch (action.type) {
+    case 'food_form/set':
+      return action.data;
+    default:
+      return state;
+    }
+}
+
+function cat_breed(state=[], action) {
+  switch (action.type) {
+    case 'cat_breed/set':
+      return action.data;
+    default:
+      return state;
+    }
+}
+
+function food_like(state=0, action) {
+  switch (action.type) {
+    case 'food_like/set':
+      return action.data;
+    default:
+      return state;
+    }
+}
+
+function food_dislike(state=0, action) {
+  switch (action.type) {
+    case 'food_dislike/set':
+      return action.data;
+    default:
+      return state;
+    }
+}
+
+function adoption(state=[], action) {
+  switch (action.type) {
+    case 'adoption/set':
+      return action.data;
+    default:
+      return state;
+    }
+}
+
 function root_reducer(state, action) {
     let reducer = combineReducers({
-        forumcomments, forum_score, forum_form, forums, comments, score,
+        adoption, food_dislike, food_like, cat_breed, food_form, foods, forumcomments, forum_score, forum_form, forums, comments, score,
         wellness_form, wellness, users, user_form, session, error,
     });
     return reducer(state, action);
 }
+
+
 
 let store = createStore(root_reducer);
 export default store;

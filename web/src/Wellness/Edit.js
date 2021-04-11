@@ -6,6 +6,7 @@ import pick from 'lodash/pick';
 import store from '../store';
 import { update_wellness , fetch_wellness, fetch_user, fetch_single_wellness } from '../api';
 
+
 function WellnessEdit({user_form, session, wellness_form}) {
   let location = useLocation()
   let wellness_id = location.pathname.split("/wellness/edit/")[1]

@@ -6,6 +6,7 @@ import pick from 'lodash/pick';
 import store from '../store';
 import { create_user, fetch_users, api_login, fetch_reason } from '../api';
 
+//referenced from lecture code SPA Structure from Nat Tuck CS4550 Northeastern University
 function UsersNew() {
   let history = useHistory();
   const [user, setUser] = useState({

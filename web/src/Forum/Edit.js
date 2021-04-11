@@ -6,6 +6,7 @@ import pick from 'lodash/pick';
 import store from '../store';
 import { update_forum , fetch_forums, fetch_user, fetch_forum } from '../api';
 
+//referenced from lecture code SPA Structure from Nat Tuck CS4550 Northeastern University
 function ForumEdit({user_form, session, forum_form}) {
   let location = useLocation()
   let forum_id = location.pathname.split("/forum/edit/")[1]

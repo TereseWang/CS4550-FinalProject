@@ -5,6 +5,7 @@ import { Link, useHistory, NavLink, useLocation } from 'react-router-dom';
 import { fetch_user, fetch_forum, fetch_forums } from '../api';
 import Carousel from 'react-bootstrap/Carousel';
 
+//referenced from lecture code SPA Structure from Nat Tuck CS4550 Northeastern University
 function ForumList ({forums, session}) {
   let history = useHistory()
   let location = useLocation();

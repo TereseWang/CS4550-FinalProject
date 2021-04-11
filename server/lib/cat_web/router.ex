@@ -28,6 +28,7 @@ defmodule CatWeb.Router do
     resources "/comments", CommentController, except: [:new, :edit]
     resources "/forums", ForumController, except: [:new, :edit]
     resources "/forumcomments", ForumcommentController, except: [:new, :edit]
+    resources "/foods", FoodController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development
