@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :cat, Cat.Repo,
   username: "kittenlover",
-  password: "liechohf6Cie",
+  password: "sitee9igee2A",
   database: "kittenlover_prod",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
