@@ -9,3 +9,6 @@
 - thecatapi: https://thecatapi.com/terms
 - This website is purely a informational website, there will be non sensitive information
 - and also no financial trading
+
+# Images articles:
+References for image and articles is putted actually inside the browser
