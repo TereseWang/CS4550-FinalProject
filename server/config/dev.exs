@@ -2,9 +2,9 @@ use Mix.Config
 
 # Configure your database
 config :cat, Cat.Repo,
-  username: "final",
-  password: "cheik6eiyeBe",
-  database: "cat_dev",
+  username: "kittenlover",
+  password: "liechohf6Cie",
+  database: "kittenlover_prod",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -23,7 +23,7 @@ config :cat, CatWeb.Endpoint,
   watchers: []
 
 config :cors_plug,
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", "http://kittenlover.teresewang.com"],
   max_age: 86400,
   methods: ["GET", "POST", "PATCH", "DELETE"]
 

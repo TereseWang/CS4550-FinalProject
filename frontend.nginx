@@ -1,9 +1,9 @@
 server {
 	listen 80;
 	listen [::]:80;
-	root /home/kittenlover/CS4550-FinalProject/build;
+	root /home/kittenlover/CS4550-FinalProject/web/build;
 	index index.html;
-	server_name kittenlove.teresewang.com www.kittenlove.teresewang.com;
+	server_name kittenlover.teresewang.com;
 	location / {
 		try_files $uri $uri/ =404;
 	}
