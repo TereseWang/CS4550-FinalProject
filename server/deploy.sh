@@ -29,7 +29,7 @@ DB_PASS=$(cat "$CFGD/db_pass")
 export DATABASE_URL=ecto://kittenlover:$DB_PASS@localhost/kittenlover_prod
 
 mix ecto.create
-mix ecto.migrate
+mix ecto.reset
 
 npm install --prefix ./assets
 npm run deploy --prefix ./assets
