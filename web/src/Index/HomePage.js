@@ -48,7 +48,7 @@ function HomePage({wellness, forums, foods}) {
   }
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
   function ShowingFood() {

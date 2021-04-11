@@ -2,7 +2,7 @@ import store from './store';
 //referenced from lecture code SPA Structure from Nat Tuck CS4550 Northeastern University
 async function api_get(path) {
   let text = await fetch(
-    "http://localhost:4000/api/v1" + path, {});
+    "http://kittenlover-backend.teresewang.com/api/v1" + path, {});
   let resp = await text.json();
   return resp.data;
 }
@@ -16,7 +16,7 @@ async function api_post(path, data) {
     body: JSON.stringify(data),
   };
   let text = await fetch(
-    "http://localhost:4000/api/v1" + path, opts);
+    "http://kittenlover-backend.teresewang.com/api/v1" + path, opts);
   return await text.json();
 }
 //--------------------------Lost Found Kitten------------------
@@ -72,7 +72,7 @@ export async function create_food(food) {
     food["photo"] = "";
   }
   data.append("food[photo]", food.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/foods", {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/foods", {
     method: "POST",
     body: data,
   })
@@ -90,7 +90,7 @@ export async function update_food(food) {
   data.append("food[brand]", food.brand)
   data.append("food[price]", food.price)
   data.append("food[photo]", food.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/foods/" + food.id, {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/foods/" + food.id, {
     method: "PATCH",
     body: data,
   })
@@ -100,7 +100,7 @@ return await resp.json();
 export async function delete_food(id) {
   let data = new FormData();
   data.append("id", id);
-  fetch("http://localhost:4000/api/v1/foods/" + id, {
+  fetch("http://kittenlover-backend.teresewang.com/api/v1/foods/" + id, {
     method: 'DELETE',
     body: data,
   }).then((resp) => {
@@ -155,7 +155,7 @@ export async function update_food_vote(food, user_id, action) {
     food["photo"] = "";
   }
   data.append("food[photo]", food.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/foods/" + food.id, {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/foods/" + food.id, {
     method: "PATCH",
     body: data,
   })
@@ -205,7 +205,7 @@ export async function create_forum(post) {
     post["photo"] = "";
   }
   data.append("forum[photo]", post.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/forums", {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/forums", {
     method: "POST",
     body: data,
   })
@@ -218,7 +218,7 @@ export async function update_forum(post) {
   data.append("forum[title]", post.title);
   data.append("forum[body]", post.body);
   data.append("forum[photo]", post.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/forums/" + post.id, {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/forums/" + post.id, {
     method: "PATCH",
     body: data,
   })
@@ -228,7 +228,7 @@ return await resp.json();
 export async function delete_forum(id) {
   let data = new FormData();
   data.append("id", id);
-  fetch("http://localhost:4000/api/v1/forums/" + id, {
+  fetch("http://kittenlover-backend.teresewang.com/api/v1/forums/" + id, {
     method: 'DELETE',
     body: data,
   }).then((resp) => {
@@ -261,7 +261,7 @@ export async function update_forum_vote(post, user_id, action) {
     post["photo"] = "";
   }
   data.append("forum[photo]", post.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/forums/" + post.id, {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/forums/" + post.id, {
     method: "PATCH",
     body: data,
   })
@@ -300,7 +300,7 @@ export async function create_comment(comment, user_id, wellness_id) {
   data.append("comment[body]", comment);
   data.append("comment[health_id]", wellness_id);
   data.append("comment[user_id]", user_id);
-  let resp = await fetch("http://localhost:4000/api/v1/comments", {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/comments", {
     method: "POST",
     body: data,
   })
@@ -310,7 +310,7 @@ export async function create_comment(comment, user_id, wellness_id) {
 export async function delete_comment(id, wellness_id) {
   let data = new FormData();
   data.append("id", id);
-  fetch("http://localhost:4000/api/v1/comments/" + id, {
+  fetch("http://kittenlover-backend.teresewang.com/api/v1/comments/" + id, {
     method: 'DELETE',
     body: data,
   }).then((resp) => {
@@ -350,7 +350,7 @@ export async function create_forumcomment(forumcomment, user_id, forum_id) {
   data.append("forumcomment[body]", forumcomment);
   data.append("forumcomment[forum_id]", forum_id);
   data.append("forumcomment[user_id]", user_id);
-  let resp = await fetch("http://localhost:4000/api/v1/forumcomments", {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/forumcomments", {
     method: "POST",
     body: data,
   })
@@ -360,7 +360,7 @@ export async function create_forumcomment(forumcomment, user_id, forum_id) {
 export async function delete_forumcomment(id, forum_id) {
   let data = new FormData();
   data.append("id", id);
-  fetch("http://localhost:4000/api/v1/forumcomments/" + id, {
+  fetch("http://kittenlover-backend.teresewang.com/api/v1/forumcomments/" + id, {
     method: 'DELETE',
     body: data,
   }).then((resp) => {
@@ -403,7 +403,7 @@ export async function create_user(user) {
     user["photo"] = "";
   }
   data.append("user[photo]", user.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/users", {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/users", {
     method: "POST",
     body: data,
   })
@@ -418,7 +418,7 @@ export async function update_user(user) {
   data.append("user[password]", user.password);
   data.append("user[reason]", user.reason);
   data.append("user[photo]", user.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/users/" + user.id, {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/users/" + user.id, {
     method: "PATCH",
     body: data,
   })
@@ -452,7 +452,7 @@ export async function create_wellness(post) {
     post["photo"] = "";
   }
   data.append("health[photo]", post.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/healths", {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/healths", {
     method: "POST",
     body: data,
   })
@@ -465,7 +465,7 @@ export async function update_wellness(post) {
   data.append("health[title]", post.title);
   data.append("health[body]", post.body);
   data.append("health[photo]", post.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/healths/" + post.id, {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/healths/" + post.id, {
     method: "PATCH",
     body: data,
   })
@@ -475,7 +475,7 @@ return await resp.json();
 export async function delete_wellness(id) {
   let data = new FormData();
   data.append("id", id);
-  fetch("http://localhost:4000/api/v1/healths/" + id, {
+  fetch("http://kittenlover-backend.teresewang.com/api/v1/healths/" + id, {
     method: 'DELETE',
     body: data,
   }).then((resp) => {
@@ -508,7 +508,7 @@ export async function update_wellness_vote(post, user_id, action) {
     post["photo"] = "";
   }
   data.append("health[photo]", post.photo);
-  let resp = await fetch("http://localhost:4000/api/v1/healths/" + post.id, {
+  let resp = await fetch("http://kittenlover-backend.teresewang.com/api/v1/healths/" + post.id, {
     method: "PATCH",
     body: data,
   })

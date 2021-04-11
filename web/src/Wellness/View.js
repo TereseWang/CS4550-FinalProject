@@ -22,7 +22,7 @@ function WellnessView({session, wellness_form, user_form, score, comments}) {
   }
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
   function deleteWellness(){
@@ -67,7 +67,7 @@ function WellnessView({session, wellness_form, user_form, score, comments}) {
   }
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
   function EditCommentButton({comment}) {

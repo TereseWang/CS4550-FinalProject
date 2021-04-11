@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 //referenced from lecture code Nav file from Nat Tuck CS4550 Northeastern University
 function photo_path(hash) {
-  return "http://localhost:4000/photos/" + hash;
+  return "http://kittenlover-backend.teresewang.com/photos/" + hash;
 }
 
 function LoginForm() {

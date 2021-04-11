@@ -24,7 +24,7 @@ function ForumView({session, forum_form, user_form, forum_score, forumcomments})
   }
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
   function deleteForum(){
@@ -69,7 +69,7 @@ function ForumView({session, forum_form, user_form, forum_score, forumcomments})
   }
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
   function EditCommentButton({comment}) {

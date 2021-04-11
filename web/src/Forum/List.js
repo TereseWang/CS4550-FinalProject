@@ -11,7 +11,7 @@ function ForumList ({forums, session}) {
   let location = useLocation();
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
   function AddNewForumButton() {

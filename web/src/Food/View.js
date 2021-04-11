@@ -23,7 +23,7 @@ function FoodView({session, food_form, user_form, food_like, food_dislike}) {
   }
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
   function deleteForum(){
@@ -84,7 +84,7 @@ function FoodView({session, food_form, user_form, food_like, food_dislike}) {
   }
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
     if (session) {

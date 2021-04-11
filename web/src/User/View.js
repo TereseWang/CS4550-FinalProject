@@ -10,7 +10,7 @@ function UsersView() {
   let history = useHistory();
 
   function photo_path(hash) {
-    return "http://localhost:4000/photos/" + hash;
+    return "http://kittenlover-backend.teresewang.com/photos/" + hash;
   }
 
   function Redirect({to, children}) {
@@ -52,7 +52,7 @@ function UsersView() {
       return <OtherUserView current_user={current_user}/>
     }
   }
-  
+
   const LoginInRegister = connect(
     ({session, current_user}) => ({session, current_user}))(LoginView);
 

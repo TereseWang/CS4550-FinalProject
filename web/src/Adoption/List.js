@@ -1,6 +1,6 @@
-import { Card, CardColumns, Row, Col, Button, Form } from 'react-bootstrap';
+import { Card, CardColumns, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { useHistory, useLocation, Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useState } from 'react';
 import pick from 'lodash/pick';
 import {fetch_adoption} from '../api';
